@@ -15,3 +15,7 @@ Here are the steps to perform in order to use the project:
 - do <code>npm run start</code>
 - visit **http://localhost:1992** to check out the project
 - Open the URL in other tabs and see messages flowing between them.
+
+Todo:
+* Auth/Protect WebSocket Server
+* How to identify who someone is and send them only there lunch orders.
