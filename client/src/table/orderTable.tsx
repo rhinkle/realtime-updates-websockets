@@ -2,22 +2,15 @@ import React, {useEffect, useState} from 'react';
 import {buildLunchOrder, LunchOrder} from "../order/order";
 import faker from "faker";
 
-
-
 export function OrderTable(props:{client: WebSocket}) {
   const {client} = props;
 
   const defaultOrders: LunchOrder[] = [buildLunchOrder(faker.name.firstName(), faker.random.alphaNumeric(10))];
   const [lunchOrders, setLunchOrders] = useState(defaultOrders);
 
-
-  useEffect(() => {
-    client.onopen = () => {
-      console.log("Connection Established");
-    }
-
     client.onmessage = (message) => {
       const data = JSON.parse(message.data);
+      console.log(data);
       console.log(`Message Found: ${data.lead.name}`);
 
       setLunchOrders(titleOrders => [
@@ -25,7 +18,6 @@ export function OrderTable(props:{client: WebSocket}) {
         buildLunchOrder(data.lead.name, data.lead.lunchOrderId)
       ]);
     }
-  });
 
   return (
     <>

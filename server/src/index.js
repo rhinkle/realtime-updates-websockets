@@ -28,11 +28,11 @@ const getUniqueID = () => {
 
 wsServer.on('request', (request) => {
     const userId = getUniqueID();
+    const connection = request.accept(null, request.origin);
     console.log((new Date()) + ' Received a new connection from origin ' + request.origin + '.');
 
-    const connection = request.accept(null, request.origin);
-    clients[userId] = connection;
-    console.log('connected: ' + userId + ' in ' + Object.getOwnPropertyNames(clients));
+    clients[userId] = connection
+    console.log('connected: ' + userId);
 
     const defaultMsg = () => {
         return {
@@ -52,10 +52,10 @@ wsServer.on('request', (request) => {
           console.log('Received Message: ', message.utf8Data);
     
           // broadcasting message to all connected clients
-          for(let key in clients) {
-            clients[key].sendUTF(message.utf8Data);
-            console.log('sent Message to: ', clients[key]);
-          }
+          // for(let key in clients) {
+          //   clients[key].sendUTF(message.utf8Data);
+          //   console.log('sent Message to: ', key);
+          // }
         }
       })
     connection.on('close', () => {
