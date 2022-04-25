@@ -3,8 +3,6 @@ const websocket = require("websocket").server
 const http = require("http");
 const faker = require("faker");
 
-
-
 const server = http.createServer();
 server.listen(websocketPort);
 console.log(`listening on port ${websocketPort}`);
@@ -14,7 +12,6 @@ const wsServer = new websocket({
 });
 
 const clients = {};
-
 function newLunchOrder() {
     return {
         name: faker.name.firstName(),
@@ -22,7 +19,7 @@ function newLunchOrder() {
     }
 }
 
-// This code generates unique userid for everyuser.
+// This code generates unique userid for every-user.
 const getUniqueID = () => {
     const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
     return s4() + s4() + '-' + s4();
@@ -30,7 +27,7 @@ const getUniqueID = () => {
 
 
 wsServer.on('request', (request) => {
-    var userId = getUniqueID();
+    const userId = getUniqueID();
     console.log((new Date()) + ' Received a new connection from origin ' + request.origin + '.');
 
     const connection = request.accept(null, request.origin);
