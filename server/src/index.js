@@ -50,12 +50,10 @@ wsServer.on('request', (request) => {
     connection.on('message', function(message) {
         if (message.type === 'utf8') {
           console.log('Received Message: ', message.utf8Data);
-    
           // broadcasting message to all connected clients
           // for(let key in clients) {
           //   clients[key].sendUTF(message.utf8Data);
           //   console.log('sent Message to: ', key);
-          // }
         }
       })
     connection.on('close', () => {
